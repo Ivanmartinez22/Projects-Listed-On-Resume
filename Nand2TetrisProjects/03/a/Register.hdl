@@ -1,0 +1,92 @@
+// File: Register.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a 16 bit register
+
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Register.hdl
+
+/**
+ * 16-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ * else out does not change
+ */
+
+CHIP Register {
+    IN in[16], load;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Mux(a = Q1, b = in[0], sel = load, out = Y1);
+    DFF(in = Y1, out = Q1);
+    Or(a = Q1, b = Q1, out = out[0]); 
+
+    Mux(a = Q2, b = in[1], sel = load, out = Y2);
+    DFF(in = Y2, out = Q2);
+    Or(a = Q2, b = Q2, out = out[1]); 
+
+    Mux(a = Q3, b = in[2], sel = load, out = Y3);
+    DFF(in = Y3, out = Q3);
+    Or(a = Q3, b = Q3, out = out[2]); 
+
+    Mux(a = Q4, b = in[3], sel = load, out = Y4);
+    DFF(in = Y4, out = Q4);
+    Or(a = Q4, b = Q4, out = out[3]); 
+
+    Mux(a = Q5, b = in[4], sel = load, out = Y5);
+    DFF(in = Y5, out = Q5);
+    Or(a = Q5, b = Q5, out = out[4]); 
+
+    Mux(a = Q6, b = in[5], sel = load, out = Y6);
+    DFF(in = Y6, out = Q6);
+    Or(a = Q6, b = Q6, out = out[5]); 
+
+    Mux(a = Q7, b = in[6], sel = load, out = Y7);
+    DFF(in = Y7, out = Q7);
+    Or(a = Q7, b = Q7, out = out[6]); 
+
+    Mux(a = Q8, b = in[7], sel = load, out = Y8);
+    DFF(in = Y8, out = Q8);
+    Or(a = Q8, b = Q8, out = out[7]); 
+
+    Mux(a = Q9, b = in[8], sel = load, out = Y9);
+    DFF(in = Y9, out = Q9);
+    Or(a = Q9, b = Q9, out = out[8]); 
+
+    Mux(a = Q10, b = in[9], sel = load, out = Y10);
+    DFF(in = Y10, out = Q10);
+    Or(a = Q10, b = Q10, out = out[9]); 
+
+    Mux(a = Q11, b = in[10], sel = load, out = Y11);
+    DFF(in = Y11, out = Q11);
+    Or(a = Q11, b = Q11, out = out[10]); 
+
+    Mux(a = Q12, b = in[11], sel = load, out = Y12);
+    DFF(in = Y12, out = Q12);
+    Or(a = Q12, b = Q12, out = out[11]); 
+
+    Mux(a = Q13, b = in[12], sel = load, out = Y13);
+    DFF(in = Y13, out = Q13);
+    Or(a = Q13, b = Q13, out = out[12]); 
+
+    Mux(a = Q14, b = in[13], sel = load, out = Y14);
+    DFF(in = Y14, out = Q14);
+    Or(a = Q14, b = Q14, out = out[13]); 
+
+    Mux(a = Q15, b = in[14], sel = load, out = Y15);
+    DFF(in = Y15, out = Q15);
+    Or(a = Q15, b = Q15, out = out[14]); 
+
+    Mux(a = Q16, b = in[15], sel = load, out = Y16);
+    DFF(in = Y16, out = Q16);
+    Or(a = Q16, b = Q16, out = out[15]); 
+
+}

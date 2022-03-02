@@ -1,0 +1,27 @@
+// File: Not.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements a not gate
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Not.hdl
+
+/**
+ * Not gate: 
+ * out = not in
+ */
+
+CHIP Not {
+    IN in;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    Nor(a = in, b = in, out = out);
+}

@@ -1,0 +1,57 @@
+// File: RAM8.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a RAM8
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM8.hdl
+
+/**
+ * Memory of 8 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // use dmux to do it 
+    DMux8Way16(in = in, sel = address, a = r1, b = r2, c = r3,  d= r4, e = r5, f = r6, g = r7, h=r8);
+    DMux8Way(in = load, sel = address, a = l1, b = l2, c = l3,  d= l4, e = l5, f = l6, g = l7, h=l8 );
+    //Register 0
+    //address 000
+    Register(in =r1, load =l1, out=out1);
+    //Register 1
+    //address 001
+    Register(in = r2, load =l2, out=out2);
+    //Register 2
+    //address 010
+    Register(in =r3, load =l3, out=out3);
+    //Register 3
+    //address 011
+    Register(in =r4, load =l4, out=out4);
+    //Register 4
+    //address 100
+    Register(in =r5, load =l5, out=out5);
+    //Register 5
+    //address 101
+    Register(in =r6, load =l6, out=out6);
+    //Register 6
+    //address 110
+    Register(in =r7, load =l7, out=out7);
+    //Register 7
+    //address 111
+    Register(in =r8, load =l8, out=out8);
+    //mux
+    Mux8Way16(a = out1, b = out2, c = out3, d = out4, e = out5, f = out6, g = out7, h = out8, sel = address, out = out);
+}

@@ -1,0 +1,35 @@
+// File: Sequence.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a three value sequence 
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/Fibonacci.hdl
+//Fibonacci Number Generator
+//Given two initial numbers f0 and f1, the sequence will be generated
+//Further description of problem in project document.
+
+CHIP Sequence {
+	IN f0[16], enable1, msel,msel2, enable2, enable3, f1[16], f2[16], enable4;
+	OUT out[16];
+
+	PARTS:
+	//Put your code here.
+	Mux16(a = f0, b = out9, sel = msel, out = out1); // mux 1
+	Register(in = out1, load = enable1, out = out3); // register 1 
+	Mux16(a = f1, b = out3, sel = msel, out = out2); // mux2
+	Register(in = out2, load = enable2, out = out4); // register 2
+	Add16(a = out3, b = out4, out = out5); // adder 1 
+	Mux16(a = f2, b = out5, sel = msel2, out = out6);
+	Register(in = out6, load = enable3, out = out7);
+	Add16(a = out5, b = out7, out = out8);
+	Register(in = out8, load = enable4, out = out9);
+
+
+}

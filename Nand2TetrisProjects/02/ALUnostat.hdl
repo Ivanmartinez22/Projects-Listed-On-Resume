@@ -1,0 +1,67 @@
+// File: ALUnostat.hdl
+// Author: Ivan Martinez
+// Date: 9/20/2021
+// Section: 505
+// E-mail: ivanattexas@tamu.edu 
+// Description:
+// The content of this file implements a arithmetic logic unit with no zr or ng
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/ALU-nostat.hdl
+
+/**
+ * The ALU (Arithmetic Logic Unit).
+ * Computes one of the following functions:
+ * x+y, x-y, y-x, 0, 1, -1, x, y, -x, -y, !x, !y,
+ * x+1, y+1, x-1, y-1, x&y, x|y on two 16-bit inputs, 
+ * according to 6 input bits denoted zx,nx,zy,ny,f,no.
+ */
+
+// Implementation: the ALU logic manipulates the x and y inputs
+// and operates on the resulting values, as follows:
+// if (zx == 1) set x = 0        // 16-bit constant done
+// if (nx == 1) set x = !x       // bitwise not done
+// if (zy == 1) set y = 0        // 16-bit constant  done
+// if (ny == 1) set y = !y       // bitwise not done
+// if (f == 1)  set out = x + y  // integer 2's complement addition done
+// if (f == 0)  set out = x & y  // bitwise and 
+// if (no == 1) set out = !out   // bitwise not 
+
+CHIP ALUnostat {
+    IN  
+        x[16], y[16],  // 16-bit inputs        
+        zx, // zero the x input?
+        nx, // negate the x input? done
+        zy, // zero the y input?
+        ny, // negate the y input? done
+        f,  // compute out = x + y (if 1) or x & y (if 0) done
+        no; // negate the out output?
+
+    OUT 
+        out[16]; // 16-bit output
+
+    PARTS:
+   // Put you code here:
+   Mux16(a = x, b[0..15] = false, sel = zx, out = x1);
+   Not16(in = x1, out = negatedx);
+   Mux16(a = x1, b = negatedx, sel = nx, out = x2);
+
+   Mux16(a = y, b[0..15] = false, sel = zy, out = y1);
+   Not16(in = y1, out = negatedy);
+   Mux16(a = y1, b = negatedy, sel = ny, out = y2);
+   
+   Add16(a = x2, b = y2, out = sum);
+   And16(a = x2, b = y2, out = andxy);
+   Mux16(a = andxy, b = sum, sel = f, out = outf);
+   Not16(in = outf, out = notout);
+   Mux16(a = outf, b = notout, sel = no, out = out);
+
+
+
+
+
+
+}

@@ -1,0 +1,49 @@
+// File: Elevator.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a elevator controller
+
+
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/Elevator.hdl
+/**
+ *Design an elevator controller with the following specs:
+//Assume that the building the elevator is in has 2 floors: F0 and F1. The //elevator has UP and DOWN buttons. When UP is pressed, the elevator goes one //floor up. If the elevator is on F1 and UP is pressed, it stays on F1 and sounds //a BEEP. When DOWN is pressed, the elevator goes one floor down. If the elevator //is on F0 and DOWN is pressed, it stays on F0 and sounds a
+//BEEP.If neither UP nor DOWN are pressed, or both UP and DOWN are pressed, the //elevator stays on the current floor.
+
+// u: up, d: down, n: next state, b: beep 
+//Hint : Use DFF  to map the present and next state.
+// Read description given in Lab 3 document carefully.
+ */
+// ~ is not
+// n = ~dp + u~d + up 
+//b = (~ud~p) + (u~dp)
+//DFF maps the states 
+CHIP Elevator {
+    IN  u, d;
+    OUT n, b;
+    
+	PARTS:
+    // Put your code here:
+    Not(in = d, out = notd);
+    Not(in = u, out = notu);
+    Not(in = ps, out = notps);
+    And(a = notd, b = ps, out = and1);
+    And(a = u, b = notd, out = and2);
+    And(a = u, b = ps, out = and3);
+    Or(a = and1, b = and2, out = or1);
+    Or(a = or1, b = and3, out = ns);
+    DFF(in = ns, out = ps, out = n);
+    And(a = notu, b = d, out = anda);
+    And(a = anda, b = notps, out = andb);
+    And(a = u, b = d, out = andc);
+    And(a = andc, b = ps, out = andd);
+    Or(a = andb, b = andd, out = b);
+}

@@ -1,0 +1,47 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/b/RAM4K.hdl
+
+/**
+ * Memory of 4K registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM4K {
+    IN in[16], load, address[12];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    DMux8Way16(in = in, sel = address[0..2], a = c1, b = c2, c = c3,  d= c4, e = c5, f = c6, g = c7, h=c8); // cluster input 
+    DMux8Way(in = load, sel = address[0..2], a = l1, b = l2, c = l3,  d= l4, e = l5, f = l6, g = l7, h=l8 );
+
+    //ram cluster 1 
+    //ram cluster address: 000 of address [0..2]
+    RAM512(in =c1, load = l1, address = address[3..11], out =  out1);
+    //ram cluster 2
+    //ram cluster address: 001 of address [0..2]
+    RAM512(in =c2, load = l2, address = address[3..11], out =  out2);
+    //ram cluster 3
+    //ram cluster address: 010 of address [0..2]
+    RAM512(in =c3, load = l3, address = address[3..11], out =  out3);
+    //ram cluster 4
+    //ram cluster address: 011 of address [0..2]
+    RAM512(in =c4, load = l4, address = address[3..11], out =  out4);
+    //ram cluster 5
+    //ram cluster address: 100 of address [0..2]
+    RAM512(in =c5, load = l5, address = address[3..11], out =  out5);
+    //ram cluster 6
+    //ram cluster address: 101 of address [0..2]
+    RAM512(in =c6, load = l6, address = address[3..11], out =  out6);
+    //ram cluster 7
+    //ram cluster address: 110 of address [0..2]
+    RAM512(in =c7, load = l7, address = address[3..11], out =  out7);
+    //ram cluster 8
+    //ram cluster address: 111 of address [0..2]
+    RAM512(in =c8, load = l8, address = address[3..11], out =  out8);
+    Mux8Way16(a = out1, b = out2, c = out3, d = out4, e = out5, f = out6, g = out7, h = out8, sel = address[0..2], out = out);
+}

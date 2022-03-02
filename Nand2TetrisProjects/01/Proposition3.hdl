@@ -1,0 +1,35 @@
+// File: Proposition3.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements a boolean expression of propostion 3
+
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/And.hdl
+
+/**
+ * And gate: 
+ * out = 1 if (a == 1 and b == 1)
+ *       0 otherwise
+ */
+
+CHIP Proposition3{
+    IN a, b, c;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    Not(in = b, out = notb);
+    Not(in = c, out = notc);
+    Or(a = notb, b = notc, out = out1);
+    Not(in = out1, out = notout1);
+    Not(in = a, out = nota);
+    Or(a = notout1, b = nota, out = out);
+    
+}

@@ -1,0 +1,27 @@
+// File: Proposition4.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements a boolean expression of propostion 4
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/And.hdl
+
+
+CHIP Proposition4{
+    IN a, b, c;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    Not(in = a, out = nota);
+    Not(in = b, out = notb);
+    And(a = nota, b = notb, out = out1);
+    Or(a = out1, b = c, out = out);
+    
+}

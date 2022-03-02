@@ -1,0 +1,52 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/b/RAM16K.hdl
+
+/**
+ * Memory of 16K registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM16K {
+    IN in[16], load, address[14];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // Put your code here:
+
+    DMux4Way16(in = in, sel = address[0..1], a = c1, b = c2, c = c3,  d= c4); // cluster input 
+    DMux4Way(in = load, sel = address[0..1], a = l1, b = l2, c = l3,  d= l4);
+
+    //Or(a = address[0], b = address[0], out = out21);
+    //Or(a = address[1], b = address[1], out = out31);
+    //Or(a = address[2], b = address[2], out = out41);
+    //Or(a = address[3], b = address[3], out = out5);
+    //Or(a = address[4], b = address[4], out = out6);
+    //Or(a = address[5], b = address[5], out = out7);
+    //Or(a = address[6], b = address[6], out = out8);
+    //Or(a = address[7], b = address[7], out = out9);
+    //Or(a = address[8], b = address[8], out = out10);
+    //Or(a = address[9], b = address[9], out = out11);
+    //Or(a = address[10], b = address[10], out = out12);
+    //Or(a = address[11], b = address[11], out = out13);
+    //Or(a = address[12], b = address[12], out = out14);
+    //Or(a = address[13], b = address[13], out = out15);
+
+    //ram cluster 1 
+    //ram cluster address: 00 of address [0..1]
+    RAM4K (in =c1, load = l1, address = address[2..13], out =  out1);
+    //ram cluster 2
+    //ram cluster address: 01 of address [0..1]
+    RAM4K (in =c2, load = l2, address = address[2..13], out =  out2);
+    //ram cluster 3
+    //ram cluster address: 10 of address [0..1]
+    RAM4K (in =c3, load = l3, address = address[2..13], out =  out3);
+    //ram cluster 4
+    //ram cluster address: 11 of address [0..1]
+    RAM4K (in =c4, load = l4, address = address[2..13], out =  out4);
+    Mux4Way16(a = out1, b = out2, c = out3, d = out4, sel = address[0..1],out = out);
+}

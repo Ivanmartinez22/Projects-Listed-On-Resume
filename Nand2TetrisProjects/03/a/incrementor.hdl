@@ -1,0 +1,25 @@
+// File: incrementor.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a incrementor that increments a 16 bit input by 1 
+
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+
+CHIP incrementor {
+    IN in[16],EN;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Inc16(in = in, out = out1);
+    Mux16(a = in, b = out1, sel = EN, out = out);
+}

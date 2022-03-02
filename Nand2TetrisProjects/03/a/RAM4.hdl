@@ -1,0 +1,44 @@
+// File: RAM4.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a ram4
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM8.hdl
+
+/**
+ * Memory of 8 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM4 {
+    IN in[16], load, address[2];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // use dmux to do it 
+    DMux4Way16(in = in, sel = address, a = r1, b = r2, c = r3,  d= r4);
+    DMux4Way(in = load, sel = address, a = l1, b = l2, c = l3,  d= l4);
+    //Register 0
+    //address 00
+    Register(in =r1, load =l1, out=out1);
+    //Register 1
+    //address 01
+    Register(in = r2, load =l2, out=out2);
+    //Register 2
+    //address 10
+    Register(in =r3, load =l3, out=out3);
+    //Register 3
+    //address 11
+    Register(in =r4, load =l4, out=out4);
+    Mux4Way16(a = out1, b = out2, c = out3, d = out4, sel = address, out = out);
+}

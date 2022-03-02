@@ -1,0 +1,51 @@
+/ File: Elavator.hdl
+// Author: Ivan Martinez
+// Date: 9/20/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// The content of this file implements the elavator control circuit
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/Elevator.hdl
+
+/**
+ * Design an elevator controller such that the option to go up or down by only one //floor is disabled. Assume that the building the elevator is in has 4 floors. //Your inputs are the current floor and the next requested floor. The output from //the controller should be the next floor to go to.
+*Hint: Since there are four floors, you will need 2 bits to represent a floor.
+*example: current floor: 01, requested floor: 11, next floor: 11 or
+*example: current floor: 00, requested floor: 01, next floor: 00 (disabled condition)
+ */
+
+CHIP Elevator {
+    IN c[2], r[2];
+    OUT next[2];
+
+    PARTS:
+   // Put you code here:
+   
+ 
+    Not(in=c[0],out=notc0);
+    Not(in=r[1],out=notr1);
+    Not(in=c[1],out=notc1);
+    Not(in=r[0],out=notr0);
+    And(a=r[0],b=notc0,out=r0andnotc0);
+    And(a=notc1,b=notr1,out=notc1andnotr1);
+    And(a=notc1andnotr1,b=r0andnotc0,out=out1);
+    And(a=c[0],b=notr0,out=out2);
+    And(a=notc1andnotr1,b=out2,out=out3);
+    And(a=notc1,b=r[1],out=out4);
+    And(a=out2,b=out4,out=out5);
+    And(a=c[1],b=notr1,out=out6);
+    And(a=r0andnotc0,b=out6,out=out7);
+    And(a=c[1],b=r[1],out=out8);
+    And(a=out8,b=out2,out=out9);
+    Or(a=out1,b=out3,out=out11);
+    Or(a=out5,b=out7,out=out10);
+    Or(a=out11,b=out10,out=out13);
+    Or(a=out13,b=out9,out=out14);
+    Mux(a=r[0],b=c[0],sel=out14,out=next[0]);
+    Mux(a=r[1],b=c[1],sel=out14,out=next[1]);
+    
+}

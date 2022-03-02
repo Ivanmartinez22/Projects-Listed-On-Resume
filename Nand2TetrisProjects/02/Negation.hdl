@@ -1,0 +1,26 @@
+// File: Negation.hdl
+// Author: Ivan Martinez
+// Date: 9/20/2021
+// Section: 505
+// E-mail: ivanattexas@tamu.edu 
+// Description:
+// The content of this file implements the negation circuit
+
+
+
+
+
+/**
+ * Negate a 16-bit number, be aware that first bit is the sign-bit
+ */
+
+CHIP Negation {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+   // Put you code here:
+   Not16(in = in, out = out1);
+   Inc16(in = out1, out = out);
+
+}

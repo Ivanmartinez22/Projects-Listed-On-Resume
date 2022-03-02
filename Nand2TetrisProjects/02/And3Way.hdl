@@ -1,0 +1,27 @@
+// File: And3Way.hdl
+// Author: Ivan Martinez
+// Date: 9/20/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// The content of this file implements the 3wayAnd
+
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/And8Way.hdl
+// Solution
+
+
+CHIP And3Way {
+    IN a, b, c;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+	And(a = a, b = b, out = out1);
+    And(a = out1, b = c, out = out);
+
+}

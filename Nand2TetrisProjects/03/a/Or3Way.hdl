@@ -1,0 +1,26 @@
+// File: Or3Way.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements an 3way Or
+
+
+// This file is part of www.nAnd2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or8Way.hdl
+
+
+CHIP Or3Way {
+    IN a, b, c;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+
+    Or(a = a, b = b, out = aorb);
+    Or(a = aorb, b = c, out = out);
+}
+    

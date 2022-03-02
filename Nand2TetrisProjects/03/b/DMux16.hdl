@@ -1,0 +1,79 @@
+// File: DMux.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements Dmux gate
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux.hdl
+
+/**
+ * Demultiplexor:
+ * {a, b} = {in, 0} if sel == 0
+ *          {0, in} if sel == 1
+ */
+
+CHIP DMux16{
+    IN in[16], sel;
+    OUT a[16], b[16];
+
+    PARTS:
+    // Put your code here:
+    Not(in = sel, in = sel, out = notsel);
+    And(a = in[0], b = notsel, out = a[0]);
+    And(a = in[0], b = sel, out = b[0]);
+
+    And(a = in[1], b = notsel, out = a[1]);
+    And(a = in[1], b = sel, out = b[1]);
+
+    And(a = in[2], b = notsel, out = a[2]);
+    And(a = in[2], b = sel, out = b[2]);
+
+    And(a = in[3], b = notsel, out = a[3]);
+    And(a = in[3], b = sel, out = b[3]);
+
+    And(a = in[4], b = notsel, out = a[4]);
+    And(a = in[4], b = sel, out = b[4]);
+
+    And(a = in[5], b = notsel, out = a[5]);
+    And(a = in[5], b = sel, out = b[5]);
+
+    And(a = in[6], b = notsel, out = a[6]);
+    And(a = in[6], b = sel, out = b[6]);
+
+    And(a = in[7], b = notsel, out = a[7]);
+    And(a = in[7], b = sel, out = b[7]);
+
+    And(a = in[8], b = notsel, out = a[8]);
+    And(a = in[8], b = sel, out = b[8]);
+
+    And(a = in[11], b = notsel, out = a[11]);
+    And(a = in[11], b = sel, out = b[11]);
+
+    And(a = in[9], b = notsel, out = a[9]);
+    And(a = in[9], b = sel, out = b[9]);
+
+    And(a = in[10], b = notsel, out = a[10]);
+    And(a = in[10], b = sel, out = b[10]);
+
+    And(a = in[12], b = notsel, out = a[12]);
+    And(a = in[12], b = sel, out = b[12]);
+
+    And(a = in[13], b = notsel, out = a[13]);
+    And(a = in[13], b = sel, out = b[13]);
+
+    And(a = in[14], b = notsel, out = a[14]);
+    And(a = in[14], b = sel, out = b[14]);
+    
+    And(a = in[15], b = notsel, out = a[15]);
+    And(a = in[15], b = sel, out = b[15]);
+
+    
+
+
+}

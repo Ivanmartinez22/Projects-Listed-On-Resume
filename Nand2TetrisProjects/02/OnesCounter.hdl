@@ -1,0 +1,36 @@
+// File: OnesCounter.hdl
+// Author: Ivan Martinez
+// Date: 9/20/2021
+// Section: 505
+// E-mail: ivanattexas@tamu.edu 
+// Description:
+// The content of this file implements the ones counter
+
+
+
+
+
+
+/**
+ * A number of 1s counter outputs in binary, on two outputs, the number of
+ * 1s on a three-bit input.
+ * Example: input: 010 > 01,  input: 101 >  10, input: 000 > 00 
+ */
+
+CHIP OnesCounter{
+    IN in[3];
+    OUT out[2];
+
+    PARTS:
+   // Put you code here:
+   Xor(a=in[0],b=in[1],out=xorout1);
+   Xor(a=xorout1,b=in[2],out=xorout2);
+   And(a=in[0],b=in[1],out=andout1);
+   And(a=andout1,b=in[2],out=andout2);
+   Or(a=xorout2,b=andout2,out=out[0]);
+   And(a=in[0],b=in[2],out=andout3);
+   And(a=in[1],b=in[2],out=andout4);
+   Xor(a=andout1,b=andout3,out=xorout3);
+   Xor(a=xorout3,b=andout4,out=xorout4);
+   Or(a=xorout4,b=andout2,out=out[1]);
+}

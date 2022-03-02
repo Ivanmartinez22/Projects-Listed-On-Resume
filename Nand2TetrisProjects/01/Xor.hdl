@@ -1,0 +1,30 @@
+// File: Xor.hdl
+// Author: Ivan Martinez
+// Date: 9/13/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// e.g. The content of this file implements a exclusive or gate
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Xor.hdl
+
+/**
+ * Exclusive-or gate:
+ * out = not (a == b)
+ */
+
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    Not(in = a, in = a, out = notx);
+    Not(in = b, in = b, out = noty);
+    And(a = a, b = noty, out = out1);
+    And(a = notx, b = b, out = out2);
+    Or(a = out1, b = out2, out = out);
+}

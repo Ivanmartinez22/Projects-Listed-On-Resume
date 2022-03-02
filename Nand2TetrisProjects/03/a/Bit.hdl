@@ -1,0 +1,30 @@
+// File: Bit.hdl
+// Author: Ivan Martinez
+// Date: 10/4/2021
+// Section: 505
+// E-mail: Ivanattexasl@tamu.edu 
+// Description:
+// The content of this file implements a 1 bit register 
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Bit.hdl
+
+/**
+ * 1-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ *                 else out does not change (out[t+1] = out[t])
+ */
+
+CHIP Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    //Put your code here:
+    Mux(a = Q, b = in, sel = load, out = Y);
+    DFF(in = Y, out = Q);
+    Or(a = Q, b = Q, out = out);    
+}

@@ -1,0 +1,46 @@
+// File: RightArithmeticBitshift.hdl
+// Author: Ivan Matinez
+// Date: 10/04/2021
+// Section: 505
+// E-mail: Ivanattexas@tamu.edu 
+// Description:
+//The content of this file implements a right bit shift
+
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/RightArithmeticBitshift.hdl
+
+/**
+ * Please read instruction in project document
+ * 
+ */
+// load = 0, in = 1, tick, tock, output shift by 1 bit
+// load = 1, in = 0, tick, tock, output shift by 1 bit and MSB is replaced with 0
+// load = 1, in = 1, tick, tock, output shift by 1 bit and MSB is replaced with 1
+// load = 0, in = 0, tick, tock, output shift by 1 bit
+// load = 1, in = 1, reset = 1, tick, tock, output becomes 0000
+CHIP RightArithmeticBitshift {
+    IN in, load, reset;
+    OUT out[4];
+
+    PARTS:
+    Mux(a = in,b = false, sel = reset, out = rewrite);
+    Mux(a = reset,b = true, sel = load, out = loadsel);
+    Bit(in = rewrite, load = loadsel, out = out1);
+    Or(a = out1, b = out1, out = out[3]);
+
+    Mux(a = out1,b = false, sel = reset, out = rewrite1);
+    Bit(in = rewrite1, load = true, out = out2);
+    Or(a = out2, b = out2, out = out[2]);
+
+    Mux(a = out2,b = false, sel = reset, out = rewrite2);
+    Bit(in = rewrite2, load = true, out = out3);
+    Or(a = out3, b = out3, out = out[1]);
+
+    Mux(a = out3,b = false, sel = reset, out = rewrite3);
+    Bit(in = rewrite3, load = true, out = out4);
+    Or(a = out4, b = out4, out = out[0]);
+    
+}
